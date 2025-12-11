@@ -12,6 +12,7 @@ body {
 }
 
 /* -------------------- ESTRUCTURA GENERAL -------------------- */
+
 .page {
     max-width: 1200px;
     margin: 0 auto;
@@ -34,23 +35,26 @@ body {
     border: 2px solid #ffffff;
 }
 
-/* La zona central se reorganiza según el breakpoint */
+.cabecera {
+    font-weight: bold;
+}
+
+/* Zona central: por defecto (móvil) en columna */
 .zona-central {
-    display: block; /* mobile first */
+    padding: 0;
 }
 
-/* Contenido (menú enlaces + formulario) */
-.contenido {
-    display: block; /* mobile */
+/* Columna izquierda y derecha (banner) – móviles: apilado */
+.col-izquierda {
+    /* mobile: bloque normal */
 }
 
-/* Menú lateral en mobile: oculto,
-   para quieres verlo, cambia a display:block */
-.menu-lateral {
-    display: none;
+.banner {
+    margin-top: 0.5rem;
 }
 
-/* Formulario base */
+/* -------------------- FORMULARIO BASE (MÓVIL) -------------------- */
+
 .formulario h1 {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
@@ -62,8 +66,6 @@ body {
     padding: 1rem;
     border-radius: 4px;
 }
-
-/* -------------------- FORMULARIO DETALLE -------------------- */
 
 fieldset {
     border: 1px solid #c5c5c5;
@@ -123,95 +125,104 @@ button[type="submit"]:hover {
     filter: brightness(1.05);
 }
 
+/* En móvil ocultamos también el menú lateral para simplificar */
+.menu-lateral {
+    display: none;
+}
+
 /* ============================================================
    TABLET (680px – 1023px)
-   - Menú superior a la izquierda, Banner a la derecha (alineados arriba)
-   - Debajo, formulario a la izquierda y el banner ocupando toda la altura
+   - Columna izquierda: Menú + Formulario (apilados)
+   - Columna derecha: Banner vertical
    - Menú enlaces oculto
    ============================================================ */
+
 @media screen and (min-width: 680px) and (max-width: 1023.98px) {
 
     .zona-central {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas:
-            "menu banner"
-            "contenido banner";
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
         gap: 0.5rem;
         padding: 0.5rem;
     }
 
+    .col-izquierda {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;   /* menú arriba, formulario debajo */
+        gap: 0.5rem;
+    }
+
     .menu-principal {
-        grid-area: menu;
+        /* ocupa toda la anchura de la columna izquierda */
     }
 
     .contenido {
-        grid-area: contenido;
+        /* solo el formulario en tablet */
+    }
+
+    .menu-lateral {
+        display: none;            /* oculto en tablet */
     }
 
     .banner {
-        grid-area: banner;
+        flex: 0 0 25%;
         display: flex;
-        align-items: stretch;
+        align-items: center;
         justify-content: center;
-    }
-
-    /* Ocultamos el menú de enlaces en tablet */
-    .menu-lateral {
-        display: none;
-    }
-
-    #form-contacto {
-        max-width: 100%;
+        min-height: 400px;        /* simula banner vertical */
+        margin-top: 0;            /* alineado con el menú */
     }
 }
 
 /* ============================================================
-   ESCRITORIO (≥1024px)
-   - Fila 1: Menú a todo el ancho
-   - Fila 2: Menú enlaces | Formulario | Banner
+   ESCRITORIO (≥ 1024px)
+   - Menú arriba dentro de la columna izquierda
+   - Debajo: Menú enlaces + Formulario en dos columnas
+   - Banner columna derecha
    ============================================================ */
+
 @media screen and (min-width: 1024px) {
 
     .zona-central {
-        display: grid;
-        grid-template-columns: 1fr 2.5fr 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas:
-            "menu menu menu"
-            "contenido contenido banner";
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
         gap: 0.5rem;
         padding: 0.5rem;
     }
 
-    .menu-principal {
-        grid-area: menu;
+    .col-izquierda {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
-    /* Contenido (columna central) se subdivide en menú enlaces + formulario */
+    /* Fila inferior: menú lateral + formulario */
     .contenido {
-        grid-area: contenido;
-        display: grid;
-        grid-template-columns: 1fr 2.5fr;
-        grid-template-areas: "menu-lateral formulario";
+        display: flex;
+        flex-direction: row;
         gap: 0.5rem;
     }
 
     .menu-lateral {
-        grid-area: menu-lateral;
         display: block;
+        flex: 0 0 25%;
     }
 
     .formulario {
-        grid-area: formulario;
+        flex: 1 1 auto;
     }
 
     .banner {
-        grid-area: banner;
+        flex: 0 0 25%;
         display: flex;
-        align-items: stretch;
+        align-items: center;
         justify-content: center;
+        min-height: 450px;
+        margin-top: 0;
     }
 
     /* Etiquetas a la izquierda, campos a la derecha */
@@ -245,6 +256,7 @@ button[type="submit"]:hover {
 }
 
 /* -------------------- IMPRESIÓN -------------------- */
+
 @media print {
 
     body {
@@ -260,7 +272,6 @@ button[type="submit"]:hover {
     }
 
     .zona-central {
-        display: block;
         padding: 0;
     }
 
