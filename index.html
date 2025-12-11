@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen DIW 1ª Evaluación – Maqueta responsive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+    <header class="cabecera">
+        Nombre Alumno
+    </header>
+
+    <nav class="menu-principal">
+        Menú
+    </nav>
+
+    <main class="contenido">
+        <aside class="menu-lateral">
+            Menú enlaces
+        </aside>
+
+        <section class="formulario">
+            <h1>Formulario de contacto</h1>
+
+            <form id="form-contacto" action="#" method="post" novalidate>
+                <!-- INFORMACIÓN PERSONAL -->
+                <fieldset class="fs-personal">
+                    <legend>Información personal</legend>
+
+                    <div class="form-row">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos"
+                               placeholder="Apellidos..."
+                               required maxlength="15"
+                               pattern="[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\\s]{1,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre"
+                               placeholder="Nombre..."
+                               required maxlength="15"
+                               pattern="[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\\s]{1,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="edad">Edad</label>
+                        <input type="number" id="edad" name="edad"
+                               placeholder="Edad..."
+                               required min="18" max="99">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                               required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="nif">NIF</label>
+                        <input type="text" id="nif" name="nif"
+                               placeholder="NIF..."
+                               required maxlength="9"
+                               pattern="[0-9A-Za-z]{9}">
+                    </div>
+                </fieldset>
+
+                <!-- DIRECCIÓN -->
+                <fieldset class="fs-direccion">
+                    <legend>Dirección</legend>
+
+                    <div class="form-row">
+                        <label for="tipo_via">Tipo de vía</label>
+                        <select id="tipo_via" name="tipo_via" required>
+                            <option value="">Selecciona...</option>
+                            <option value="calle">Calle</option>
+                            <option value="avenida">Avenida</option>
+                            <option value="plaza">Plaza</option>
+                            <option value="camino">Camino</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion"
+                               placeholder="Dirección..."
+                               required maxlength="15"
+                               pattern="[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\\s]{1,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" id="ciudad" name="ciudad"
+                               placeholder="Ciudad..."
+                               required maxlength="15"
+                               pattern="[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\\s]{1,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="provincia">Provincia</label>
+                        <input type="text" id="provincia" name="provincia"
+                               placeholder="Provincia..."
+                               required maxlength="15"
+                               pattern="[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\\s]{1,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="cp">Código postal</label>
+                        <input type="text" id="cp" name="cp"
+                               placeholder="Código postal..."
+                               required pattern="[0-9]{5}" maxlength="5">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono"
+                               placeholder="Teléfono..."
+                               required pattern="[0-9\\s+]{6,15}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="Correo electrónico..."
+                               required>
+                    </div>
+                </fieldset>
+
+                <!-- OTROS -->
+                <fieldset class="fs-otros">
+                    <legend>Otros</legend>
+
+                    <div class="form-row">
+                        <label for="info_adicional">Información adicional</label>
+                        <textarea id="info_adicional" name="info_adicional"
+                                  placeholder="Información adicional..." rows="4"></textarea>
+                    </div>
+                </fieldset>
+
+                <div class="form-row form-row-boton">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </section>
+
+        <aside class="banner">
+            Banner
+        </aside>
+    </main>
+
+    <footer class="pie">
+        Footer
+    </footer>
+
+</div>
+</body>
+</html>

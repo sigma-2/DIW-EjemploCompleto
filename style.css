@@ -1,0 +1,285 @@
+/* -------------------- RESET BÁSICO -------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* -------------------- MAQUETA GENERAL (MOBILE FIRST) -------------------- */
+
+.page {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cabecera,
+.menu-principal,
+.pie,
+.menu-lateral,
+.banner,
+.formulario {
+    padding: 0.8rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #1e88e5; /* azul tipo maqueta */
+    border: 2px solid #ffffff;
+}
+
+.cabecera {
+    font-weight: bold;
+}
+
+.menu-principal {
+    margin-top: 0;
+}
+
+.contenido {
+    display: block;   /* En móvil, todo en columna */
+}
+
+.menu-lateral {
+    display: none; /* Solo en escritorio */
+}
+
+.formulario {
+    background-color: #1e88e5;
+}
+
+.banner {
+    margin-top: 0.5rem;
+}
+
+.pie {
+    margin-top: auto;
+}
+
+/* Contenido interno del formulario: caja blanca sobre el bloque azul */
+.formulario h1 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+#form-contacto {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 4px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* -------------------- FORMULARIO: MOBILE FIRST -------------------- */
+
+fieldset {
+    border: 1px solid #c5c5c5;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+legend {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    color: #666666;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.7rem;
+}
+
+.form-row label {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    padding: 0.45rem 0.5rem;
+    border-radius: 3px;
+    border: 1px solid #bdbdbd;
+    font-size: 0.9rem;
+}
+
+.form-row textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row-boton {
+    margin-top: 1rem;
+    align-items: center;
+}
+
+button[type="submit"] {
+    padding: 0.6rem 2.5rem;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: none;
+    background-color: #5c6bc0;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #3949ab;
+}
+
+button[type="submit"]:hover {
+    filter: brightness(1.05);
+}
+
+/* -------------------- TABLET ≥ 680px -------------------- */
+/* Maqueta: header y menú arriba, formulario izquierda, banner derecha */
+
+@media screen and (min-width: 680px) and (max-width: 1023.98px) {
+
+    .contenido {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .formulario {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+
+    .banner {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-lateral {
+        display: none;
+    }
+
+    /* Formulario tablet: todo en columna, pero fieldsets bien definidos */
+    #form-contacto {
+        max-width: 95%;
+    }
+}
+
+/* -------------------- ESCRITORIO ≥ 1024px -------------------- */
+/* Maqueta: menú lateral izquierda + formulario centro + banner derecha */
+
+@media screen and (min-width: 1024px) {
+
+    .contenido {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr 1fr;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .menu-lateral {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formulario {
+        grid-column: 2 / 3;
+    }
+
+    .banner {
+        grid-column: 3 / 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #form-contacto {
+        max-width: 100%;
+    }
+
+    /* Formulario escritorio: etiquetas a la izquierda, campos a la derecha */
+    .form-row {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .form-row label {
+        width: 30%;
+        margin-bottom: 0;
+        text-align: right;
+        padding-right: 0.75rem;
+        border-bottom: 1px dotted #cccccc;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+        flex: 1;
+        border-bottom: 1px dotted #cccccc;
+    }
+
+    .fs-otros .form-row textarea {
+        min-height: 130px;
+    }
+
+    .form-row-boton {
+        justify-content: center;
+    }
+
+    .form-row-boton label {
+        display: none;
+    }
+
+    .form-row-boton button {
+        border-bottom: none;
+    }
+}
+
+/* -------------------- IMPRESIÓN -------------------- */
+/* Solo se imprime el formulario */
+
+@media print {
+
+    body {
+        background: #ffffff;
+    }
+
+    .cabecera,
+    .menu-principal,
+    .banner,
+    .menu-lateral,
+    .pie {
+        display: none !important;
+    }
+
+    .page {
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .contenido {
+        display: block;
+        padding: 0;
+    }
+
+    .formulario {
+        background: #ffffff;
+        padding: 0;
+        border: none;
+    }
+
+    #form-contacto {
+        border: none;
+        box-shadow: none;
+    }
+}
