@@ -1,4 +1,4 @@
-/* -------------------- RESET BÁSICO -------------------- */
+/* -------------------- RESET -------------------- */
 *,
 *::before,
 *::after {
@@ -11,8 +11,7 @@ body {
     background-color: #f0f0f0;
 }
 
-/* -------------------- MAQUETA GENERAL (MOBILE FIRST) -------------------- */
-
+/* -------------------- ESTRUCTURA GENERAL -------------------- */
 .page {
     max-width: 1200px;
     margin: 0 auto;
@@ -24,46 +23,34 @@ body {
 
 .cabecera,
 .menu-principal,
-.pie,
 .menu-lateral,
+.formulario,
 .banner,
-.formulario {
+.pie {
     padding: 0.8rem;
     text-align: center;
     color: #ffffff;
-    background-color: #1e88e5; /* azul tipo maqueta */
+    background-color: #1e88e5;
     border: 2px solid #ffffff;
 }
 
-.cabecera {
-    font-weight: bold;
+/* La zona central se reorganiza según el breakpoint */
+.zona-central {
+    display: block; /* mobile first */
 }
 
-.menu-principal {
-    margin-top: 0;
-}
-
+/* Contenido (menú enlaces + formulario) */
 .contenido {
-    display: block;   /* En móvil, todo en columna */
+    display: block; /* mobile */
 }
 
+/* Menú lateral en mobile: lo normal es ocultarlo también,
+   pero si quieres verlo, cambia a display:block */
 .menu-lateral {
-    display: none; /* Solo en escritorio */
+    display: none;
 }
 
-.formulario {
-    background-color: #1e88e5;
-}
-
-.banner {
-    margin-top: 0.5rem;
-}
-
-.pie {
-    margin-top: auto;
-}
-
-/* Contenido interno del formulario: caja blanca sobre el bloque azul */
+/* Formulario base */
 .formulario h1 {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
@@ -74,11 +61,9 @@ body {
     background-color: #ffffff;
     padding: 1rem;
     border-radius: 4px;
-    max-width: 100%;
-    margin: 0 auto;
 }
 
-/* -------------------- FORMULARIO: MOBILE FIRST -------------------- */
+/* -------------------- FORMULARIO DETALLE -------------------- */
 
 fieldset {
     border: 1px solid #c5c5c5;
@@ -138,76 +123,98 @@ button[type="submit"]:hover {
     filter: brightness(1.05);
 }
 
-/* -------------------- TABLET ≥ 680px -------------------- */
-/* Maqueta: header y menú arriba, formulario izquierda, banner derecha */
-
+/* ============================================================
+   TABLET (680px – 1023px)
+   - Menú superior a la izquierda, Banner a la derecha (alineados arriba)
+   - Debajo, formulario a la izquierda y el banner ocupando toda la altura
+   - Menú enlaces oculto
+   ============================================================ */
 @media screen and (min-width: 680px) and (max-width: 1023.98px) {
 
-    .contenido {
+    .zona-central {
         display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "menu banner"
+            "contenido banner";
         gap: 0.5rem;
         padding: 0.5rem;
     }
 
-    .formulario {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
+    .menu-principal {
+        grid-area: menu;
+    }
+
+    .contenido {
+        grid-area: contenido;
     }
 
     .banner {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
+        grid-area: banner;
         display: flex;
-        align-items: center;
+        align-items: stretch;
         justify-content: center;
     }
 
+    /* Ocultamos el menú de enlaces en tablet */
     .menu-lateral {
         display: none;
-    }
-
-    /* Formulario tablet: todo en columna, pero fieldsets bien definidos */
-    #form-contacto {
-        max-width: 95%;
-    }
-}
-
-/* -------------------- ESCRITORIO ≥ 1024px -------------------- */
-/* Maqueta: menú lateral izquierda + formulario centro + banner derecha */
-
-@media screen and (min-width: 1024px) {
-
-    .contenido {
-        display: grid;
-        grid-template-columns: 1fr 2.5fr 1fr;
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
-
-    .menu-lateral {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .formulario {
-        grid-column: 2 / 3;
-    }
-
-    .banner {
-        grid-column: 3 / 4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     #form-contacto {
         max-width: 100%;
     }
+}
 
-    /* Formulario escritorio: etiquetas a la izquierda, campos a la derecha */
+/* ============================================================
+   ESCRITORIO (≥1024px)
+   - Fila 1: Menú a todo el ancho
+   - Fila 2: Menú enlaces | Formulario | Banner
+   ============================================================ */
+@media screen and (min-width: 1024px) {
+
+    .zona-central {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "menu menu menu"
+            "contenido contenido banner";
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .menu-principal {
+        grid-area: menu;
+    }
+
+    /* Contenido (columna central) se subdivide en menú enlaces + formulario */
+    .contenido {
+        grid-area: contenido;
+        display: grid;
+        grid-template-columns: 1fr 2.5fr;
+        grid-template-areas: "menu-lateral formulario";
+        gap: 0.5rem;
+    }
+
+    .menu-lateral {
+        grid-area: menu-lateral;
+        display: block;
+    }
+
+    .formulario {
+        grid-area: formulario;
+    }
+
+    .banner {
+        grid-area: banner;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    /* Etiquetas a la izquierda, campos a la derecha */
     .form-row {
         flex-direction: row;
         align-items: center;
@@ -228,14 +235,6 @@ button[type="submit"]:hover {
         border-bottom: 1px dotted #cccccc;
     }
 
-    .fs-otros .form-row textarea {
-        min-height: 130px;
-    }
-
-    .form-row-boton {
-        justify-content: center;
-    }
-
     .form-row-boton label {
         display: none;
     }
@@ -246,8 +245,6 @@ button[type="submit"]:hover {
 }
 
 /* -------------------- IMPRESIÓN -------------------- */
-/* Solo se imprime el formulario */
-
 @media print {
 
     body {
@@ -256,20 +253,19 @@ button[type="submit"]:hover {
 
     .cabecera,
     .menu-principal,
-    .banner,
     .menu-lateral,
+    .banner,
     .pie {
         display: none !important;
     }
 
-    .page {
-        margin: 0;
-        box-shadow: none;
+    .zona-central {
+        display: block;
+        padding: 0;
     }
 
     .contenido {
         display: block;
-        padding: 0;
     }
 
     .formulario {
